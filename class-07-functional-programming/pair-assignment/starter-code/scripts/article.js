@@ -18,7 +18,7 @@
   Article.prototype.toHtml = function() {
     var template = Handlebars.compile($('#article-template').text());
 
-    this.daysAgo = parseInt((new Date() - new Date(this.publishedOn))/60/60/24/1000);
+    this.daysAgo = parseInt((new Date() - new Date(this.publishedOn)) / 60 / 60 / 24 / 1000);
     this.publishStatus = this.publishedOn ? 'published ' + this.daysAgo + ' days ago' : '(draft)';
     this.body = marked(this.body);
 
@@ -80,19 +80,28 @@
 
   // DONE: Chain together a `map` and a `reduce` call to get a rough count of all words in all articles.
   Article.numWordsAll = function() {
+
     return Article.all.map(function(article) {
       return article.body.match(/\b\w+/g).length;// Grab the words from the `article` `body` (hint: lookup String.prototype.match() and regexp!).
     })
     .reduce(function(a, b) {
       return (a + b);// Sum up all the values!
-    })
+    });
   };
 
   // TODO: Chain together a `map` and a `reduce` call to produce an array of unique author names.
   Article.allAuthors = function() {
-    return      Article.all.map(function(article){ // map our collection
-      return     article.author;// return just the author names
-    }).reduce
+    return Article.all.map(function(article){
+          // map our collection
+      return article.author;// return just the author names
+    }).reduce(function(a,b){
+      if(a.indexOf(b) === -1){
+        a.push(b);
+        return a;
+      } else {
+        return a;
+      }
+    },[]);
       // For our `reduce` that we'll chain here -- since we are trying to return an array, we'll need to specify an accumulator type...
       // what data type should this accumulator be and where is it placed?
   };
@@ -103,14 +112,22 @@
     // written by the specified author.
     return Article.allAuthors().map(function(author) {
       return {
-        // name:
-        // numWords: someCollection.filter(function(curArticle) {
+        name: author,
+        numWords: Article.all.filter(function(curArticle) {
+          return curArticle.author === author;
+        })
         //  what do we return here to check for matching authors?
         // })
         // .map(...) // use .map to return the author's word count for each article (hint: regexp!).
+        .map(function(curArticle){
+          return curArticle.body.split(' ').length;
+        })
         // .reduce(...) // squash this array of numbers into one big number!
-      }
-    })
+          .reduce(function(acc, cur) {
+            return acc + cur;
+          })
+      };
+    });
   };
   module.Article = Article;
 })(window);
