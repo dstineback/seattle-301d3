@@ -44,7 +44,7 @@
   // This function will retrieve the data from either a local or remote source,
   // and process it, then hand off control to the View.
 
-  // TODO: Refactor the Article.fetchAll method, and provide it with a parameter of a callback
+  // DONE: Refactor the Article.fetchAll method, and provide it with a parameter of a callback
   // function (for now just a placeholder, but to be referenced at call-time as a "view" function)
   // that will execute once the loading of articles is done. We do this because we might want
   // to call other view functions, and not just the initIndexPage() that we are replacing.
@@ -78,7 +78,7 @@
     });
   };
 
-  // TODO: Chain together a `map` and a `reduce` call to get a rough count of all words in all articles.
+  // DONE: Chain together a `map` and a `reduce` call to get a rough count of all words in all articles.
   Article.numWordsAll = function() {
     return Article.all.map(function(article) {
       return article.body.match(/\b\w+/g).length;// Grab the words from the `article` `body` (hint: lookup String.prototype.match() and regexp!).
@@ -90,9 +90,9 @@
 
   // TODO: Chain together a `map` and a `reduce` call to produce an array of unique author names.
   Article.allAuthors = function() {
-    return       // map our collection
-      return    // return just the author names
-
+    return      Article.all.map(function(article){ // map our collection
+      return     article.author;// return just the author names
+    }).reduce
       // For our `reduce` that we'll chain here -- since we are trying to return an array, we'll need to specify an accumulator type...
       // what data type should this accumulator be and where is it placed?
   };
