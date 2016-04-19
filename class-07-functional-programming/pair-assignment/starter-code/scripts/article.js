@@ -89,7 +89,7 @@
     });
   };
 
-  // TODO: Chain together a `map` and a `reduce` call to produce an array of unique author names.
+  // DONE: Chain together a `map` and a `reduce` call to produce an array of unique author names.
   Article.allAuthors = function() {
     return Article.all.map(function(article){
           // map our collection
@@ -107,7 +107,7 @@
   };
 
   Article.numWordsByAuthor = function() {
-    // TODO: Transform each element into an object with 2 properties: One for
+    // DONE: Transform each element into an object with 2 properties: One for
     // the author's name, and one for the total number of words across the matching articles
     // written by the specified author.
     return Article.allAuthors().map(function(author) {
