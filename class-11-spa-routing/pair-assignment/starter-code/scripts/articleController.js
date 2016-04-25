@@ -10,7 +10,7 @@
     //  of articles, using the same
     //  code that used to be in index.html:
 
-      Article.fetchAll(articleView.initIndexPage);
+    Article.fetchAll(articleView.initIndexPage);
 
     // DONE: But wait! There's more: Also be sure to hide all the main section
     //  elements, and reveal the articles section:
