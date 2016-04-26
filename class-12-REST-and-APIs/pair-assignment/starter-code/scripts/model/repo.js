@@ -1,8 +1,6 @@
 (function(module) {
   var repos = {};
 
-  repos.all = [];
-
   repos.requestRepos = function(callback) {
     // DONE: How would you like to fetch your repos? Someone say AJAX!?
     //  Don't forget to call the callback!
