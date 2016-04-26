@@ -7,17 +7,17 @@
     // TODO: How would you like to fetch your repos? Someone say AJAX!?
     //  Don't forget to call the callback!
     $.ajax({
-        url: 'https://api.github.com/users/dstineback/repos' +
-        '?per_page=10' +
-        '&sort=updated',
-        type: 'GET',
-        headers: {'Authorization': 'token ' + githubToken},
-        success: function(data){
-
-
-        }
-
-    })
+      url: 'https://api.github.com/users/dstineback/repos' +
+      '?per_page=10' +
+      '&sort=updated',
+      type: 'GET',
+      headers: {'Authorization': 'token ' + githubToken},
+      success: function(data){
+        data.forEach(function(data){
+          repos.all.push(data);
+        });
+      }
+    });
 
   };
 
