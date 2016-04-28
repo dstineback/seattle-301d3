@@ -13,9 +13,14 @@
   };
 
   // COMMENT: What does this method do?  What is it's execution path?
+  // We add a method to our empty articleView object called populate Filters. Inside there are two variables: options and template
+  // which are equal to the Handlebars compiler which is grabbing the class option-template and populating the handlebars script in
+  // the head portion of our index.html. We then call our options variable setting it equal to our .allAuthors method which is then mapped
+  // by author and then returns a template for the handlebars script setting the value equal to the author. Which again is put into
+  // our index.html template to display on our webpage. Then we run an if statement to remove any duplicate authors found in our filter.
+  // Then we append the class author filter to our options.
   articleView.populateFilters = function() {
-    var options,
-      template = Handlebars.compile($('#option-template').text());
+    var options, template = Handlebars.compile($('#option-template').text());
 
     // Example of using model method with FP, synchronous approach:
     // This method is dependant on info being in the DOM. Only authors of shown articles are loaded.
@@ -38,6 +43,9 @@
   };
 
   // COMMENT: What does this method do?  What is it's execution path?
+  // We now instantiate a new method on our articleView object. We select our filters class and use an event that cycles through
+  // it one time and takes the resource variable and replaces the url id -filter with a new url parameter that takes all the white
+  // space and changes them all to plus signs also places the resource which is the author name from the filter selection.
   articleView.handleFilters = function() {
     $('#filters').one('change', 'select', function() {
       resource = this.id.replace('-filter', '');
@@ -118,6 +126,10 @@
   };
 
   // COMMENT: What does this method do?  What is it's execution path?
+  // This method has many different functionalities. It first runs a jquery method that takes the id articles, shows it, then takes the
+  // siblings and hides them. Next, it takes all the articles within the id article and removes them. Then it runs a .forEach event on
+  // articles which appends each article and runs the render function which has a variable of template which is equal to the handlebars
+  // compile of article-template. Within that it grabs the object datat and returns the template article.
   articleView.index = function(articles) {
     $('#articles').show().siblings().hide();
 
@@ -128,6 +140,8 @@
 
     articleView.populateFilters();
     // COMMENT: What does this method do?  What is it's execution path?
+    // We are now calling the handleFilters and populateFilters functions listed above. Both methods track back through when we first
+    // instantiated each function up above. 
     articleView.handleFilters();
 
     // DONE: Replace setTeasers with just the truncation logic, if needed:
